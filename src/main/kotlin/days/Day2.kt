@@ -1,14 +1,12 @@
 package days
 
-import sandbox.Test1
-
 object Day2 {
 
   val points = mapOf("A" to 1, "B" to 2, "C" to 3, "X" to 1, "Y" to 2, "Z" to 3)
 
   @JvmStatic
   fun main(args: Array<String>) {
-    val input = this::class.java.getResourceAsStream("/day2/input.txt")
+    val input = this::class.java.getResourceAsStream("/day2.txt")
     var totalPoints = 0
 
     input.bufferedReader().useLines { lines ->

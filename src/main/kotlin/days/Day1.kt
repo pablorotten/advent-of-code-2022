@@ -3,7 +3,7 @@ package days
 object Day1 {
   @JvmStatic
   fun main(args: Array<String>) {
-    val fileContent = this::class.java.getResourceAsStream("/day1/input.txt")
+    val fileContent = this::class.java.getResourceAsStream("/day1.txt")
 
     fileContent.bufferedReader().useLines { lines ->
       var max = 0
