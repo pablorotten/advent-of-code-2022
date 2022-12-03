@@ -1,11 +1,11 @@
 package days
 
-object Day1 {
-  @JvmStatic
-  fun main(args: Array<String>) {
-    val fileContent = this::class.java.getResourceAsStream("/day1.txt")
+import util.readInput
 
-    fileContent.bufferedReader().useLines { lines ->
+fun main() {
+    val input = readInput("day1")
+
+    input.bufferedReader().useLines { lines ->
       var max = 0
       var current = 0
       lines.forEach { line ->
@@ -21,4 +21,3 @@ object Day1 {
       println("max $max")
     }
   }
-}
