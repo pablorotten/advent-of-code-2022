@@ -13,12 +13,10 @@ fun main() {
       val player2 = line.getOrElse(2) { ' ' }.toString()
 
       if (arrayOf("A", "B", "C").contains(player1) && arrayOf("X", "Y", "Z").contains(player2)) {
-
         val gamePoints = when (player1 to player2) {
           "A" to "Y", "B" to "Z", "C" to "X" -> 6
           else -> if (points[player1] == points[player2]) 3 else 0
         }
-
         totalPoints += gamePoints + points[player2]!!
       }
     }
