@@ -9,7 +9,7 @@ fun main() {
 
   input.map { line ->
     if (line.isNotEmpty())
-      current = current + line.toInt()
+      current += line.toInt()
     else {
       if (current > max) max = current
       current = 0

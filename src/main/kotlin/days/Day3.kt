@@ -7,8 +7,8 @@ fun main() {
   var priorities = 0
 
   input.map { line ->
-    val repeatedItem = line.substring(0, line.length / 2).toList()
-      .intersect(line.substring(line.length / 2, line.length).toList())
+    val repeatedItem = line.substring(0, line.length / 2).toSet()
+      .intersect(line.substring(line.length / 2, line.length).toSet())
 
     val priority =
       if (repeatedItem.isNotEmpty())
@@ -17,7 +17,7 @@ fun main() {
           else 17
       else 0
 
-    priorities = priorities + priority
+    priorities += priority
   }
   println(priorities)
 }

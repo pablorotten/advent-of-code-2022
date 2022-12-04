@@ -8,8 +8,8 @@ fun main() {
   var totalPoints = 0
 
   input.map { line ->
-    val player1 = line.getOrElse(0, { ' ' }).toString()
-    val player2 = line.getOrElse(2, { ' ' }).toString()
+    val player1 = line.getOrElse(0) { ' ' }.toString()
+    val player2 = line.getOrElse(2) { ' ' }.toString()
 
     if (arrayOf("A", "B", "C").contains(player1) && arrayOf("X", "Y", "Z").contains(player2)) {
 
@@ -18,7 +18,7 @@ fun main() {
         else -> if (points[player1] == points[player2]) 3 else 0
       }
 
-      totalPoints = totalPoints + gamePoints + points[player2]!!
+      totalPoints += gamePoints + points[player2]!!
     }
   }
   println("totalPoints:$totalPoints")
