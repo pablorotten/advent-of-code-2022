@@ -22,22 +22,20 @@ fun main() {
 
     val stacksLines = input.take(8)
 
-    for(line in stacksLines)
+    for (line in stacksLines)
       line.chunked(4).forEachIndexed { index, chunk ->
         chunk.getOrNull(1)?.let { crate ->
-          if(crate.isLetter()) stacks[index+1]?.add(crate)
+          if (crate.isLetter()) stacks[index + 1]?.add(crate)
         }
-    }
+      }
 
-    input.drop(10).map {line ->
-      line.replace("[^-?0-9]+".toRegex(), " ").trim().split(" ").let { l ->
-        for (i in 1..l[0].toInt()) {
-          stacks[l[2].toInt()]!!.addFirst(stacks[l[1].toInt()]!!.remove())
-        }
+    input.drop(10).map {
+      it.replace("[^-?0-9]+".toRegex(), " ").trim().split(" ").let { l ->
+        for (i in 1..l[0].toInt()) stacks[l[2].toInt()]!!.addFirst(stacks[l[1].toInt()]!!.remove())
       }
     }
 
-    return stacks.values.fold("") {top, stack -> top + stack[0] }
+    return stacks.values.fold("") { top, stack -> top + stack[0] }
   }
 
 
