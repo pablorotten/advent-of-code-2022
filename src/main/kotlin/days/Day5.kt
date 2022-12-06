@@ -2,7 +2,6 @@ package days
 
 import util.readInput
 import java.util.*
-import kotlin.math.min
 
 fun main() {
 
@@ -31,7 +30,7 @@ fun main() {
     }
 
     input.drop(10).map {line ->
-      line.replace("[^-?0-9]+".toRegex(), " ").trim().split(" ")?.let { l ->
+      line.replace("[^-?0-9]+".toRegex(), " ").trim().split(" ").let { l ->
         for (i in 1..l[0].toInt()) {
           stacks[l[2].toInt()]!!.addFirst(stacks[l[1].toInt()]!!.remove())
         }
