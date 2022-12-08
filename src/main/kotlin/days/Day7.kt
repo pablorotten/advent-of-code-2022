@@ -3,6 +3,7 @@ package days
 import util.readInput
 
 typealias Visitor<T> = (TreeNode<T>) -> Unit
+
 //TODO: Remove side effects and more functional!
 class TreeNode<T>(var value: T, val parent: TreeNode<T>?) {
   private val node: MutableList<TreeNode<T>> = mutableListOf()
@@ -18,7 +19,6 @@ class TreeNode<T>(var value: T, val parent: TreeNode<T>?) {
       it.forEachDepthFirst(visit)
     }
   }
-
 }
 
 fun browse(commands: List<String>): TreeNode<Int> {
@@ -65,7 +65,7 @@ fun main() {
   fun part1(): Int {
     val directory = browse(input)
     var total = 0
-    directory.forEachDepthFirst { if(it.value <= 100000) total += it.value }
+    directory.forEachDepthFirst { if (it.value <= 100000) total += it.value }
 
     return total
   }
@@ -78,7 +78,7 @@ fun main() {
     val spaceToFree = neededSpace - availableSpace
 
     var minSpaceToFree = directory.value
-    directory.forEachDepthFirst { if(it.value in  spaceToFree .. minSpaceToFree ) minSpaceToFree = it.value }
+    directory.forEachDepthFirst { if (it.value in spaceToFree..minSpaceToFree) minSpaceToFree = it.value }
 
     return minSpaceToFree
   }
