@@ -61,8 +61,6 @@ fun main() {
 
   val input = readInput("day7")
 
-  //level, acum1, acum2
-
   fun part1(): Int {
     val directory = browse(input)
     var total = 0
@@ -72,6 +70,18 @@ fun main() {
   }
 
 
-  println(part1())
+  fun part2(): Int {
+    val directory = browse(input)
+    val neededSpace = 30000000
+    val availableSpace = 70000000 - directory.value
+    val spaceToFree = neededSpace - availableSpace
 
+    var minSpaceToFree = directory.value
+    directory.forEachDepthFirst { if(it.value in  spaceToFree .. minSpaceToFree ) minSpaceToFree = it.value }
+
+    return minSpaceToFree
+  }
+
+  println(part1())
+  println(part2())
 }
