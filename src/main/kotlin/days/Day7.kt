@@ -3,6 +3,7 @@ package days
 import util.readInput
 
 typealias Visitor<T> = (TreeNode<T>) -> Unit
+//TODO: Remove side effects and more functional!
 class TreeNode<T>(var value: T, val parent: TreeNode<T>?) {
   private val node: MutableList<TreeNode<T>> = mutableListOf()
 
@@ -22,7 +23,7 @@ class TreeNode<T>(var value: T, val parent: TreeNode<T>?) {
 
 fun browse(commands: List<String>): TreeNode<Int> {
 
-  var directory = TreeNode(0, null)
+  val directory = TreeNode(0, null)
 
   var node = commands.drop(1).fold(directory) { currentNode, str ->
     when {
@@ -37,11 +38,11 @@ fun browse(commands: List<String>): TreeNode<Int> {
       str.startsWith("""$ cd """) ->
         currentNode.add(TreeNode(0, currentNode))
 
-      str.split(" ").get(0).toIntOrNull() !== null ->
-        str.split(" ").get(0).toInt()?.let {
+      str.split(" ")[0].toIntOrNull() !== null ->
+        str.split(" ")[0].toInt().let {
           currentNode.value += it
           currentNode
-        }!!
+        }
 
       else -> {
         currentNode
