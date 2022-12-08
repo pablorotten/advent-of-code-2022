@@ -20,6 +20,43 @@ class TreeNode<T>(var value: T, val parent: TreeNode<T>?) {
 
 }
 
+fun browse(commands: List<String>): TreeNode<Int> {
+
+  var directory = TreeNode(0, null)
+
+  var node = commands.drop(1).fold(directory) { currentNode, str ->
+    when {
+      str == """$ ls""" ->
+        currentNode
+
+      str == """$ cd ..""" -> {
+        currentNode.parent!!.value += currentNode.value
+        currentNode.parent!!
+      }
+
+      str.startsWith("""$ cd """) ->
+        currentNode.add(TreeNode(0, currentNode))
+
+      str.split(" ").get(0).toIntOrNull() !== null ->
+        str.split(" ").get(0).toInt()?.let {
+          currentNode.value += it
+          currentNode
+        }!!
+
+      else -> {
+        currentNode
+      }
+    }
+  }
+
+  while (node.parent != null) {
+    node.parent!!.value += node.value
+    node = node.parent!!
+  }
+
+  return node
+}
+
 fun main() {
 
   val input = readInput("day7")
@@ -27,34 +64,7 @@ fun main() {
   //level, acum1, acum2
 
   fun part1(): Int {
-
-    var directory = TreeNode(0, null)
-
-    input.drop(1).fold(directory) { currentNode, str ->
-      when {
-        str == """$ ls""" ->
-          currentNode
-
-        str == """$ cd ..""" -> {
-          currentNode.parent!!.value += currentNode.value
-          currentNode.parent!!
-        }
-
-        str.startsWith("""$ cd """) ->
-          currentNode.add(TreeNode(0, currentNode))
-
-        str.split(" ").get(0).toIntOrNull() !== null ->
-          str.split(" ").get(0).toInt()?.let {
-            currentNode.value += it
-            currentNode
-          }!!
-
-        else -> {
-          currentNode
-        }
-      }
-    }
-
+    val directory = browse(input)
     var total = 0
     directory.forEachDepthFirst { if(it.value <= 100000) total += it.value }
 
