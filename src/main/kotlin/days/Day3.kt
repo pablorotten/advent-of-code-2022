@@ -7,7 +7,6 @@ fun main() {
   val input = readInput("day3")
 
   fun calculateItemPriority(item: Char): Int {
-    println("repeated:$item")
     return Character.getNumericValue(item) +
         if (item.isLowerCase()) -9
         else 17
